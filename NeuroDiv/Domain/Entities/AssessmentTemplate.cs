@@ -10,7 +10,7 @@ namespace Domain.Entities
         public AssessmentTemplate()
         {
             Sections = new HashSet<AssessmentSection>();
-        //    ScoreRanges = new HashSet<AssessmentScoreRange>();
+            ScoreRanges = new HashSet<AssessmentScoreRange>();
         }
 
         public string Name { get; set; }
@@ -33,12 +33,9 @@ namespace Domain.Entities
         /// <summary>Null for system templates.</summary>
         public Guid? OrganizationId { get; set; }
 
-        /// <summary>Null for system templates.</summary>
-        public Guid? CreatedByTherapistId { get; set; }
-
         public bool IsActive { get; set; } = true;
 
-        // ── Scoring ───────────────────────────────────────────────────────
+        //Scoring
         /// <summary>Minimum possible total score on this template.</summary>
         public decimal MinPossibleScore { get; set; } = 0;
 
@@ -53,8 +50,8 @@ namespace Domain.Entities
 
         // Navigation
         public Organizations? Organization { get; set; }
-        public UserProfile? CreatedByTherapist { get; set; }
+        public UserProfile? CreatedByNavigation { get; set; }
         public ICollection<AssessmentSection> Sections { get; set; }
-      //  public ICollection<AssessmentScoreRange> ScoreRanges { get; set; }
+        public ICollection<AssessmentScoreRange> ScoreRanges { get; set; }
     }
 }

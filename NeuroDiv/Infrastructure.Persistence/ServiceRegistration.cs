@@ -60,6 +60,13 @@ namespace Infrastructure.Persistence
             services.AddTransient<ISessionNoShowRepositoryAsync, SessionNoShowRepositoryAsync>();
             services.AddTransient<ISessionOnlineDetailsRepositoryAsync, SessionOnlineDetailsRepositoryAsync>();
             services.AddTransient<ISessionRecurrenceRuleRepositoryAsync, SessionRecurrenceRuleRepositoryAsync>();
+            services.AddTransient<IAssessmentQuestionOptionRepositoryAsync, AssessmentQuestionOptionRepositoryAsync>();
+            services.AddTransient<IAssessmentQuestionRepositoryAsync, AssessmentQuestionRepositoryAsync>();
+            services.AddTransient<IAssessmentResponseRepositoryAsync, AssessmentResponseRepositoryAsync>();
+            services.AddTransient<IAssessmentScoreRangeRepositoryAsync, AssessmentScoreRangeRepositoryAsync>();
+            services.AddTransient<IAssessmentSectionRepositoryAsync, AssessmentSectionRepositoryAsync>();
+            services.AddTransient<IAssessmentSnapshotRepositoryAsync, AssessmentSnapshotRepositoryAsync>();
+            services.AddTransient<IAssessmentTemplateRepositoryAsync, AssessmentTemplateRepositoryAsync>();
 
             services.AddTransient<IContactUsRepositoryAsync, ContactUsRepositoryAsync>();
             services.AddTransient<ICommentRepositoryAsync, CommentRepositoryAsync>();

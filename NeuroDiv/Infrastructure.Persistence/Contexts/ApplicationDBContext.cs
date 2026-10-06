@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Infrastructure.Persistence.Contexts
 {
     public partial class ApplicationDbContext : DbContext
@@ -45,14 +46,13 @@ namespace Infrastructure.Persistence.Contexts
         public DbSet<SessionOnlineDetails> SessionOnlineDetails { get; set; }
         public DbSet<TherapistProfile> TherapistProfile { get; set; }
         public DbSet<TherapistSpecialization> TherapistSpecialization { get; set; }
-
-        //public DbSet<AssessmentTemplate> AssessmentTemplates { get; set; }
-        //public DbSet<AssessmentSection> AssessmentSections { get; set; }
-        //public DbSet<AssessmentQuestion> AssessmentQuestions { get; set; }
-        //public DbSet<AssessmentQuestionOption> AssessmentQuestionOptions { get; set; }
-        //public DbSet<AssessmentScoreRange> AssessmentScoreRanges { get; set; }
-        //public DbSet<AssessmentSnapshot> AssessmentSnapshots { get; set; }
-        //public DbSet<AssessmentResponse> AssessmentResponses { get; set; }
+        public DbSet<AssessmentTemplate> AssessmentTemplates { get; set; }
+        public DbSet<AssessmentSection> AssessmentSections { get; set; }
+        public DbSet<AssessmentQuestion> AssessmentQuestions { get; set; }
+        public DbSet<AssessmentQuestionOption> AssessmentQuestionOptions { get; set; }
+        public DbSet<AssessmentScoreRange> AssessmentScoreRanges { get; set; }
+        public DbSet<AssessmentSnapshot> AssessmentSnapshots { get; set; }
+        public DbSet<AssessmentResponse> AssessmentResponses { get; set; }
 
 
         //public DbSet<Comments> Comments { get; set; }
