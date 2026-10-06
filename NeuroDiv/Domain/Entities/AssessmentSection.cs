@@ -8,7 +8,7 @@ namespace Domain.Entities
     {
         public AssessmentSection()
         {
-         //   Questions = new HashSet<AssessmentQuestion>();
+            Questions = new HashSet<AssessmentQuestion>();
         }
 
         public Guid AssessmentTemplateId { get; set; }
@@ -20,6 +20,6 @@ namespace Domain.Entities
 
         // Navigation
         public AssessmentTemplate AssessmentTemplate { get; set; }
-       // public ICollection<AssessmentQuestion> Questions { get; set; }
+        public ICollection<AssessmentQuestion> Questions { get; set; }
     }
 }
