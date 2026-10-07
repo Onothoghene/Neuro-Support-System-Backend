@@ -26,6 +26,13 @@ jobs:
       - name: Publish
         run: dotnet publish --configuration Release --output ./publish --runtime win-x86
 
+      - name: Stamp web.config to force app pool recycle
+        shell: pwsh
+        run: |
+          $configPath = "./publish/web.config"
+          $timestamp = Get-Date -Format "o"
+          (Get-Content $configPath -Raw) -replace '</configuration>', "<!-- Deployed: $timestamp --></configuration>" | Set-Content $configPath
+
       - name: Deploy to MonsterASP.NET (QA)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
