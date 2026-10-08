@@ -24,8 +24,26 @@ jobs:
         run: dotnet test
 
       - name: Publish
-        run: dotnet publish --configuration Release --output ./publish --runtime win-x86
+        run: dotnet publish ./NeuroDiv/WebApi/WebApi.csproj --configuration Release --output ./publish --runtime win-x86
 
+      - name: Stamp web.config to force app pool recycle
+        shell: pwsh
+        run: |
+          $configPath = "./publish/web.config"
+          $timestamp = Get-Date -Format "o"
+          $original = Get-Content $configPath -Raw
+          Write-Host "--- BEFORE ---"
+          Write-Host $original
+          $updated = $original -replace '</configuration>', "<!-- Deployed: $timestamp --></configuration>"
+          if ($updated -eq $original) {
+            Write-Host "⚠️ WARNING: No replacement made — pattern not found in web.config"
+          } else {
+            Write-Host "✅ Stamp applied successfully"
+          }
+          Set-Content $configPath $updated
+          Write-Host "--- AFTER ---"
+          Get-Content $configPath -Raw | Write-Host
+        
       - name: Deploy to MonsterASP.NET (QA)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
