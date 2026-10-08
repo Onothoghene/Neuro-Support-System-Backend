@@ -11,7 +11,7 @@ namespace WebApi.Controllers.v1
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [Authorize]
-    public class AssessmentController : BaseApiController
+    public class AssessmentssssController : BaseApiController
     {
         /// <summary>
         /// Get all assessment templates visible to the current therapist.
