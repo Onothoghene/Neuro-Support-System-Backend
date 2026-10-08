@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 namespace WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    //[Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/Asse")]
     [Authorize]
-    public class AssessmentssssController : BaseApiController
+    public class AssessmentController : BaseApiController
     {
         /// <summary>
         /// Get all assessment templates visible to the current therapist.
