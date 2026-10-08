@@ -41,8 +41,6 @@ namespace Application.Features.Session.Command
                     throw new ApiException("Cancelled sessions cannot be marked as no-show.");
 
                 occurrence.Status = SessionStatus.NoShow;
-                occurrence.LastModified = DateTime.UtcNow;
-                occurrence.LastModifiedBy = _authenticatedUser.UserId;
 
                 await _occurrenceRepository.UpdateAsync(occurrence);
 

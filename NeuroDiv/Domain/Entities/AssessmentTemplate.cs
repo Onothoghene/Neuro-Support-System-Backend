@@ -51,6 +51,8 @@ namespace Domain.Entities
         // Navigation
         public Organizations? Organization { get; set; }
         public UserProfile? CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
         public ICollection<AssessmentSection> Sections { get; set; }
         public ICollection<AssessmentScoreRange> ScoreRanges { get; set; }
     }

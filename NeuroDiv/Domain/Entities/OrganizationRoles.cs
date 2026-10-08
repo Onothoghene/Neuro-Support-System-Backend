@@ -16,7 +16,9 @@ namespace Domain.Entities
         public Guid? OrganizationId { get; set; }
         public bool IsDefault { get; set; }
 
-        //public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
         public Organizations? Organizations { get; set; }
         public ICollection<OrganizationUserRoles> UserRoles { get; set; }
     }

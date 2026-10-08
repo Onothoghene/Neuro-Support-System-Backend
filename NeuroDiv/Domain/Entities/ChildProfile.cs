@@ -43,9 +43,6 @@ namespace Domain.Entities
         /// </summary>
         public Guid? OrganizationId { get; set; }
 
-        /// <summary>The therapist who created/added this child.</summary>
-        public Guid? CreatedByTherapistId { get; set; }
-
         public bool IsActive { get; set; } = true;
 
         // ── Navigation
@@ -54,5 +51,8 @@ namespace Domain.Entities
         public ICollection<TherapyGoal> TherapyGoals { get; set; }
         public ICollection<ChildTherapistAssignment> TherapistAssignments { get; set; }
         public ICollection<ChildParent> Parents { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 }

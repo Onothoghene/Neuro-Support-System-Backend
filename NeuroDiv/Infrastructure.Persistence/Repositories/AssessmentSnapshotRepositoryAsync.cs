@@ -23,7 +23,7 @@ namespace Infrastructure.Persistence.Repositories
                                                                          DateTime? fromDate, DateTime? toDate)
         {
             var query = _AssessmentSnapshot.Include(s => s.AssessmentTemplate)
-                                           .Include(s => s.Therapist)
+                                           .Include(s => s.CreatedByNavigation)
                                            .Where(s => s.ChildProfileId == childProfileId && !s.IsDeleted)
                                            .AsQueryable();
 
@@ -43,7 +43,7 @@ namespace Infrastructure.Persistence.Repositories
         {
             return await _AssessmentSnapshot.Include(s => s.AssessmentTemplate)
                                             .Include(s => s.ChildProfile)
-                                            .Include(s => s.Therapist)
+                                            .Include(s => s.CreatedByNavigation)
                                             .Include(s => s.SessionOccurrence)
                                             .Include(s => s.Responses)
                                             .ThenInclude(r => r.AssessmentQuestion)
@@ -57,7 +57,7 @@ namespace Infrastructure.Persistence.Repositories
             // Returns legacy uploads that haven't been verified yet
             var query = _AssessmentSnapshot.Include(s => s.AssessmentTemplate)
                                            .Include(s => s.ChildProfile)
-                                           .Include(s => s.Therapist)
+                                           .Include(s => s.CreatedByNavigation)
                                            .Where(s => s.IsLegacyUpload && !s.IsVerified && !s.IsDeleted)
                                            .AsQueryable();
 

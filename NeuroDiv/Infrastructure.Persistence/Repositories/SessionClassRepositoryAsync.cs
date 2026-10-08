@@ -23,7 +23,7 @@ namespace Infrastructure.Persistence.Repositories
         {
             //return await _SessionClass.FirstOrDefaultAsync(s => s.Id == id && !s.IsDeleted);
 
-            return await _SessionClass.Include(s => s.Therapist)
+            return await _SessionClass.Include(s => s.CreatedByNavigation)
                                       .Include(s => s.ChildProfile)
                                       .Include(s => s.Organization)
                                       .Include(s => s.RecurrenceRule)
@@ -45,7 +45,7 @@ namespace Infrastructure.Persistence.Repositories
 
         public async Task<List<SessionClass>> GetAllAsync(Guid? organizationId, Guid? therapistId, Guid? childProfileId, bool? isActive)
         {
-            var query = _SessionClass.Include(s => s.Therapist)
+            var query = _SessionClass.Include(s => s.CreatedByNavigation)
                                      .Include(s => s.ChildProfile)
                                      .Include(s => s.RecurrenceRule)
                                      .Where(s => !s.IsDeleted)
@@ -55,7 +55,7 @@ namespace Infrastructure.Persistence.Repositories
                 query = query.Where(s => s.OrganizationId == organizationId.Value);
 
             if (therapistId.HasValue)
-                query = query.Where(s => s.TherapistId == therapistId.Value);
+                query = query.Where(s => s.CreatedBy == therapistId.Value);
 
             if (childProfileId.HasValue)
                 query = query.Where(s => s.ChildProfileId == childProfileId.Value);

@@ -85,9 +85,6 @@ namespace Application.Features.Organizations.Command
                     if (!string.IsNullOrWhiteSpace(command.LogoUrl))
                         org.LogoUrl = command.LogoUrl;
 
-                    org.LastModified = DateTime.UtcNow;
-                    org.LastModifiedBy = _authenticatedUser.UserId;
-
                     await _organizationsRepository.UpdateAsync(org);
 
                     ts.Complete();

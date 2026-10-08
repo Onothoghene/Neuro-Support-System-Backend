@@ -45,8 +45,6 @@ namespace Application.Features.Users.Command
                 userProfile.GenderId = command.GenderId;
 
                 userProfile.OtherName = command.OtherName;
-                userProfile.LastModified = DateTime.UtcNow;
-                userProfile.LastModifiedBy = userId.ToString();
 
                 await _userProfileRepo.UpdateAsync(userProfile);
 

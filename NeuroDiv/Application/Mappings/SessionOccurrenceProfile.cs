@@ -18,8 +18,8 @@ namespace Application.Mappings
             // SessionOccurrence -> SessionOccurrenceVM
             CreateMap<SessionOccurrence, SessionOccurrenceVM>()
                 .ForMember(dest => dest.SessionTitle, opt => opt.MapFrom(src => src.SessionClass.Title))
-                .ForMember(dest => dest.TherapistFirstName, opt => opt.MapFrom(src => src.SessionClass.Therapist.FirstName))
-                .ForMember(dest => dest.TherapistLastName, opt => opt.MapFrom(src => src.SessionClass.Therapist.LastName))
+                .ForMember(dest => dest.TherapistFirstName, opt => opt.MapFrom(src => src.SessionClass.CreatedByNavigation.FirstName))
+                .ForMember(dest => dest.TherapistLastName, opt => opt.MapFrom(src => src.SessionClass.CreatedByNavigation.LastName))
                 .ForMember(dest => dest.ChildFirstName, opt => opt.MapFrom(src => src.SessionClass.ChildProfile.FirstName))
                 .ForMember(dest => dest.ChildLastName, opt => opt.MapFrom(src => src.SessionClass.ChildProfile.LastName))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))

@@ -40,8 +40,6 @@ namespace Application.Features.OrganizationUsersInvite.Command
                     
                     // Soft delete — preserves the record for audit trail
                     invite.IsDeleted = true;
-                    invite.Deleted = DateTime.UtcNow;
-                    invite.DeletedBy = _user.UserId;
 
                     await _organizationUsersInviteRepository.UpdateAsync(invite);
 

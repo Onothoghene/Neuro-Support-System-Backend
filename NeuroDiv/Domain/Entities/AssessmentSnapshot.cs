@@ -13,7 +13,6 @@ namespace Domain.Entities
 
         public Guid AssessmentTemplateId { get; set; }
         public Guid ChildProfileId { get; set; }
-        public Guid TherapistId { get; set; }
 
         /// <summary>Null if standalone assessment.</summary>
         public Guid? SessionOccurrenceId { get; set; }
@@ -49,8 +48,10 @@ namespace Domain.Entities
         // Navigation
         public AssessmentTemplate AssessmentTemplate { get; set; }
         public ChildProfile ChildProfile { get; set; }
-        public UserProfile Therapist { get; set; }
         public SessionOccurrence? SessionOccurrence { get; set; }
         public ICollection<AssessmentResponse> Responses { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 }

@@ -47,8 +47,8 @@ namespace Application.Mappings
                 .ForMember(dest => dest.TemplateName, opt => opt.MapFrom(src => src.AssessmentTemplate.Name))
                 .ForMember(dest => dest.ChildFirstName, opt => opt.MapFrom(src => src.ChildProfile.FirstName))
                 .ForMember(dest => dest.ChildLastName, opt => opt.MapFrom(src => src.ChildProfile.LastName))
-                .ForMember(dest => dest.TherapistFirstName, opt => opt.MapFrom(src => src.Therapist.FirstName))
-                .ForMember(dest => dest.TherapistLastName, opt => opt.MapFrom(src => src.Therapist.LastName));
+                .ForMember(dest => dest.TherapistFirstName, opt => opt.MapFrom(src => src.CreatedByNavigation.FirstName))
+                .ForMember(dest => dest.TherapistLastName, opt => opt.MapFrom(src => src.CreatedByNavigation.LastName));
 
             CreateMap<AssessmentSnapshot, AssessmentSnapshotSummaryVM>()
                 .ForMember(dest => dest.TemplateName, opt => opt.MapFrom(src => src.AssessmentTemplate.Name));

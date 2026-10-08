@@ -65,8 +65,7 @@ namespace WebApi.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPut("templates/{id}")]
-        public async Task<IActionResult> UpdateTemplate(
-            Guid id, UpdateAssessmentTemplateCommand command)
+        public async Task<IActionResult> UpdateTemplate(Guid id, UpdateAssessmentTemplateCommand command)
         {
             command.Id = id;
             return Ok(await Mediator.Send(command));

@@ -21,5 +21,8 @@ namespace Domain.Entities
         public AssessmentSnapshot AssessmentSnapshot { get; set; }
         public AssessmentQuestion AssessmentQuestion { get; set; }
         public AssessmentQuestionOption? SelectedOption { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 }

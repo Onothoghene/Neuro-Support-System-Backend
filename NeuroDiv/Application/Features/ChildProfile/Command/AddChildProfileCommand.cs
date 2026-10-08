@@ -50,9 +50,7 @@ namespace Application.Features.ChildProfile.Command
                 var therapistId = Guid.Parse(_authenticatedUser.UserId);
 
                 var childProfile = _mapper.Map<Domain.Entities.ChildProfile>(command);
-                childProfile.CreatedByTherapistId = therapistId;
-                childProfile.CreatedBy = _authenticatedUser.UserId;
-                childProfile.Created = DateTime.UtcNow;
+                childProfile.CreatedBy = therapistId;
 
                 // Map initial therapy goals
                 childProfile.TherapyGoals = _mapper.Map<List<Domain.Entities.TherapyGoal>>(command.TherapyGoals);

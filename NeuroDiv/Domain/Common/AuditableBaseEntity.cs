@@ -4,12 +4,12 @@ namespace Domain.Common
 {
     public abstract class AuditableBaseEntity : BaseEntity
     {
-        public string? CreatedBy { get; set; }
+        public Guid? CreatedBy { get; set; }
         public DateTime Created { get; set; }
-        public string? LastModifiedBy { get; set; }
+        public Guid? LastModifiedBy { get; set; }
         public DateTime? LastModified { get; set; }
         public DateTime? Deleted { get; set; }
-        public string? DeletedBy { get; set; }
+        public Guid? DeletedBy { get; set; }
         public bool IsDeleted { get; set; }
 
     }

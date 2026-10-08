@@ -59,8 +59,6 @@ namespace Application.Features.TherapyGoal.Command
                         goal.Status = command.Status.Value;
 
                     goal.Notes = command.Notes;
-                    goal.LastModified = DateTime.UtcNow;
-                    goal.LastModifiedBy = _authenticatedUser.UserId;
 
                     await _goalRepository.UpdateAsync(goal);
 
@@ -81,8 +79,6 @@ namespace Application.Features.TherapyGoal.Command
 
                     goal.ChildProfileId = command.ChildProfileId;
                     goal.Status = GoalStatus.NotStarted;
-                    goal.CreatedBy = _authenticatedUser.UserId;
-                    goal.Created = DateTime.UtcNow;
 
                     await _goalRepository.AddAsync(goal);
 

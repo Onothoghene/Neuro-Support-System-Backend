@@ -24,6 +24,10 @@ namespace Domain.Entities
         public string? City { get; set; }
         public string? Country { get; set; }
 
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
+
         public ICollection<OrganizationUsers> OrganizationUsers { get; set; }
         public ICollection<OrganizationRoles> OrganizationRoles { get; set; } 
         public ICollection<OrganizationUserRoles> OrganizationUserRoles { get; set; } 

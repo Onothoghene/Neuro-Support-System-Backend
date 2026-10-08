@@ -34,9 +34,9 @@ namespace Infrastructure.Persistence.Contexts
                 entity.Property(e => e.LicenseType).HasMaxLength(50);
 
                 // One UserProfile → one optional TherapistProfile
-                entity.HasOne(e => e.UserProfile)
+                entity.HasOne(e => e.CreatedByNavigation)
                       .WithOne(u => u.TherapistProfile)
-                      .HasForeignKey<TherapistProfile>(e => e.UserProfileId)
+                      .HasForeignKey<TherapistProfile>(e => e.CreatedBy)
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
@@ -64,10 +64,21 @@ namespace Infrastructure.Persistence.Contexts
                 entity.Property(e => e.CurrentEmail).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.NewEmail).IsRequired().HasMaxLength(200);
 
-                entity.HasOne(e => e.UserProfile)
+                entity.HasOne(e => e.CreatedByNavigation)
                       .WithMany(u => u.EmailChangeRequest)
-                      .HasForeignKey(e => e.UserId)
+                      .HasForeignKey(e => e.CreatedBy)
                       .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany(u => u.EmailChangeRequest)
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
             });
@@ -92,6 +103,22 @@ namespace Infrastructure.Persistence.Contexts
                 //    .IsUnique()
                 //    .HasFilter("[Domain] IS NOT NULL");
 
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
+
                 entity.HasQueryFilter(e => !e.IsDeleted);
             });
 
@@ -110,6 +137,22 @@ namespace Infrastructure.Persistence.Contexts
                       .HasForeignKey(e => e.OrganizationId)
                       .OnDelete(DeleteBehavior.Cascade);
 
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
+
                 entity.HasQueryFilter(e => !e.IsDeleted);
             });
 
@@ -125,6 +168,22 @@ namespace Infrastructure.Persistence.Contexts
                       .HasForeignKey(e => e.OrganizationId)
                       .IsRequired(false)
                       .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
             });
@@ -147,6 +206,22 @@ namespace Infrastructure.Persistence.Contexts
                 entity.HasOne(e => e.OrganizationRoles)
                       .WithMany(r => r.UserRoles)
                       .HasForeignKey(e => e.OrganizationRoleId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
                       .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
@@ -172,6 +247,23 @@ namespace Infrastructure.Persistence.Contexts
                       .HasForeignKey(e => e.OrganizationId)
                       .OnDelete(DeleteBehavior.Cascade);
 
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
+
                 entity.HasQueryFilter(e => !e.IsDeleted);
             });
 
@@ -184,6 +276,22 @@ namespace Infrastructure.Persistence.Contexts
                 entity.Property(e => e.Description).HasMaxLength(1000);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+      .WithMany()
+      .HasForeignKey(e => e.CreatedBy)
+      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //GoalCategory
@@ -194,6 +302,22 @@ namespace Infrastructure.Persistence.Contexts
                 entity.Property(e => e.Description).HasMaxLength(500);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //ChildProfile
@@ -223,6 +347,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //TherapyGoal
@@ -244,6 +384,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //ChildTherapistAssignment
@@ -265,6 +421,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //ParentProfile
@@ -285,6 +457,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.SetNull);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                //          entity.HasOne(e => e.CreatedByNavigation)
+                //.WithMany()
+                //.HasForeignKey(e => e.CreatedBy)
+                //.OnDelete(DeleteBehavior.Cascade);
+
+                //          entity.HasOne(e => e.LastModifiedByNavigation)
+                //                .WithMany()
+                //                .HasForeignKey(e => e.LastModifiedBy)
+                //                .OnDelete(DeleteBehavior.Cascade);
+
+                //          entity.HasOne(e => e.DeletedByNavigation)
+                //                .WithMany()
+                //                .HasForeignKey(e => e.DeletedBy)
+                //                .IsRequired(false)
+                //                .OnDelete(DeleteBehavior.Restrict);
             });
 
             //ChildParent (many-to-many join)
@@ -306,6 +494,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //SessionDuration
@@ -322,11 +526,6 @@ namespace Infrastructure.Persistence.Contexts
                 entity.Property(e => e.Title).IsRequired().HasMaxLength(300);
                 entity.Property(e => e.Description).HasMaxLength(1000);
 
-                entity.HasOne(e => e.Therapist)
-                      .WithMany()
-                      .HasForeignKey(e => e.TherapistId)
-                      .OnDelete(DeleteBehavior.Restrict);
-
                 entity.HasOne(e => e.ChildProfile)
                       .WithMany()
                       .HasForeignKey(e => e.ChildProfileId)
@@ -339,6 +538,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //SessionRecurrenceRule
@@ -359,6 +574,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.SetNull);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //SessionOnlineDetails
@@ -376,6 +607,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //SessionOccurrence
@@ -390,6 +637,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //SessionCancellation
@@ -405,6 +668,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //SessionNoShow
@@ -419,6 +698,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //ChildSessionRecord
@@ -441,6 +736,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //GoalProgressLog
@@ -460,6 +771,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             ////AssessmentTemplate
@@ -476,9 +803,19 @@ namespace Infrastructure.Persistence.Contexts
                       .IsRequired(false)
                       .OnDelete(DeleteBehavior.Restrict);
 
-                entity.HasOne(e => e.CreatedBy)
+                entity.HasOne(e => e.CreatedByNavigation)
                       .WithMany()
-                      .HasForeignKey(e => e.CreatedByNavigation)
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
                       .IsRequired(false)
                       .OnDelete(DeleteBehavior.Restrict);
 
@@ -498,6 +835,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //AssessmentQuestion
@@ -513,6 +866,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //AssessmentQuestionOption
@@ -527,6 +896,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //AssessmentScoreRange
@@ -543,6 +928,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //AssessmentSnapshot
@@ -564,11 +965,6 @@ namespace Infrastructure.Persistence.Contexts
                       .HasForeignKey(e => e.ChildProfileId)
                       .OnDelete(DeleteBehavior.Restrict);
 
-                entity.HasOne(e => e.Therapist)
-                      .WithMany()
-                      .HasForeignKey(e => e.TherapistId)
-                      .OnDelete(DeleteBehavior.Restrict);
-
                 entity.HasOne(e => e.SessionOccurrence)
                       .WithMany()
                       .HasForeignKey(e => e.SessionOccurrenceId)
@@ -576,6 +972,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.SetNull);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             //AssessmentResponse
@@ -601,6 +1013,22 @@ namespace Infrastructure.Persistence.Contexts
                       .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasQueryFilter(e => !e.IsDeleted);
+
+                entity.HasOne(e => e.CreatedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.CreatedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.LastModifiedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.LastModifiedBy)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.DeletedByNavigation)
+                      .WithMany()
+                      .HasForeignKey(e => e.DeletedBy)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
         }

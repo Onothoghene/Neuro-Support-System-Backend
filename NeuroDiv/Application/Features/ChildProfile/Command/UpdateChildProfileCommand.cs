@@ -84,9 +84,6 @@ namespace Application.Features.ChildProfile.Command
                 if (!string.IsNullOrWhiteSpace(command.EmergencyContactRelationship))
                     child.EmergencyContactRelationship = command.EmergencyContactRelationship;
 
-                child.LastModified = DateTime.UtcNow;
-                child.LastModifiedBy = _authenticatedUser.UserId;
-
                 await _childProfileRepository.UpdateAsync(child);
 
                 ts.Complete();

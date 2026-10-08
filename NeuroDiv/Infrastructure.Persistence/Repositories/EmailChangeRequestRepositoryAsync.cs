@@ -20,7 +20,7 @@ namespace Infrastructure.Persistence.Repositories
 
         public async Task<EmailChangeRequest?> GetPendingByUserProfileIdAsync(Guid userId)
         {
-            return await _emailChangeRequest.Where(e => e.UserId == userId && !e.IsUsed 
+            return await _emailChangeRequest.Where(e => e.CreatedBy == userId && !e.IsUsed 
                                                   && !e.IsDeleted && e.ExpiresAt > DateTime.UtcNow)
                                             .OrderByDescending(e => e.Created)
                                             .FirstOrDefaultAsync();

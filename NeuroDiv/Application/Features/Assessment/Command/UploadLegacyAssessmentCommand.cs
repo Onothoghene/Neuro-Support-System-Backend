@@ -39,7 +39,6 @@ namespace Application.Features.Assessment.Command
                 {
                     AssessmentTemplateId = command.AssessmentTemplateId,
                     ChildProfileId = command.ChildProfileId,
-                    TherapistId = therapistId,
                     SessionOccurrenceId = command.SessionOccurrenceId,
                     AssessmentDate = command.AssessmentDate,
                     TotalScore = 0,          // set after AI extraction

@@ -21,5 +21,8 @@ namespace Domain.Entities
         public SessionOccurrence SessionOccurrence { get; set; }
         public ChildProfile ChildProfile { get; set; }
         public ICollection<GoalProgressLog> GoalProgressLogs { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Application.Mappings
                .ForMember(dest => dest.TherapyGoals, opt => opt.Ignore())
                .ForMember(dest => dest.TherapistAssignments, opt => opt.Ignore())
                .ForMember(dest => dest.Parents, opt => opt.Ignore())
-               .ForMember(dest => dest.CreatedByTherapistId, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedByNavigation, opt => opt.Ignore())
                .ForMember(dest => dest.IsActive, opt => opt.Ignore())
                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
                .ForMember(dest => dest.Created, opt => opt.Ignore());

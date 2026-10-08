@@ -42,10 +42,6 @@ namespace Application.Features.OrganizationUsers.Command
                     // Soft delete — keeps record for audit trail
                     membership.IsActive = false;
                     membership.IsDeleted = true;
-                    membership.Deleted = DateTime.UtcNow;
-                    membership.DeletedBy = _authenticatedUser.UserId;
-                    membership.LastModified = DateTime.UtcNow;
-                    membership.LastModifiedBy = _authenticatedUser.UserId;
 
                     await _orgUserRepository.UpdateAsync(membership);
 

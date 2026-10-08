@@ -24,6 +24,9 @@ namespace Domain.Entities
         // Navigation
         public ChildProfile ChildProfile { get; set; }
         public UserProfile Therapist { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 
 }

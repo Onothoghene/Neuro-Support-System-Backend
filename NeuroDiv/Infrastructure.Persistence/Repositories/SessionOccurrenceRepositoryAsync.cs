@@ -30,7 +30,7 @@ namespace Infrastructure.Persistence.Repositories
         public async Task<List<SessionOccurrence>> GetAllAsync(Guid? sessionClassId, Guid? therapistId, Guid? childProfileId, SessionStatus? status, DateTime? fromDate, DateTime? toDate)
         {
             var query = _SessionOccurrence.Include(o => o.SessionClass)
-                                          .ThenInclude(s => s.Therapist)
+                                          .ThenInclude(s => s.CreatedByNavigation)
                                           .Include(o => o.SessionClass)
                                           .ThenInclude(s => s.ChildProfile)
                                           .Where(o => !o.IsDeleted)
@@ -40,7 +40,7 @@ namespace Infrastructure.Persistence.Repositories
                 query = query.Where(o => o.SessionClassId == sessionClassId.Value);
 
             if (therapistId.HasValue)
-                query = query.Where(o => o.SessionClass.TherapistId == therapistId.Value);
+                query = query.Where(o => o.SessionClass.CreatedBy == therapistId.Value);
 
             if (childProfileId.HasValue)
                 query = query.Where(o => o.SessionClass.ChildProfileId == childProfileId.Value);
@@ -64,7 +64,7 @@ namespace Infrastructure.Persistence.Repositories
             //return await _SessionOccurrence.FirstOrDefaultAsync(s => s.Id == id && !s.IsDeleted);
 
             return await _SessionOccurrence.Include(o => o.SessionClass)
-                                           .ThenInclude(s => s.Therapist)
+                                           .ThenInclude(s => s.CreatedByNavigation)
                                            .Include(o => o.SessionClass)
                                            .ThenInclude(s => s.ChildProfile)
                                            .Include(o => o.SessionClass)

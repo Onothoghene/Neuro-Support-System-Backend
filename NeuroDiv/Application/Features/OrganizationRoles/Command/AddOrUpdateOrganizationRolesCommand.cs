@@ -56,8 +56,6 @@ namespace Application.Features.OrganizationRoles.Command
 
                         role.Name = command.Name;
                         role.Description = command.Description;
-                        role.LastModified = DateTime.UtcNow;
-                        role.LastModifiedBy = _authenticatedUser.UserId;
 
                         await _orgRolesRepository.UpdateAsync(role);
 
