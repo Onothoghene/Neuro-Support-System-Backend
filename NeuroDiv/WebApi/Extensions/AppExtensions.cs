@@ -16,7 +16,7 @@ namespace WebApi.Extensions
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                //options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+                options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
                 
                 // build a swagger endpoint for each discovered WebApi version
                 foreach (var description in provider.ApiVersionDescriptions)
