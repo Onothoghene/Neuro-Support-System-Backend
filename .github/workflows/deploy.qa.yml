@@ -24,7 +24,7 @@ jobs:
         run: dotnet test
 
       - name: Publish
-        run: dotnet publish ./WebApi/WebApi.csproj --configuration Release --output ./publish --runtime win-x86
+        run: dotnet publish ./NeuroDiv/WebApi/WebApi.csproj --configuration Release --output ./publish --runtime win-x86
 
       - name: Stamp web.config to force app pool recycle
         shell: pwsh
