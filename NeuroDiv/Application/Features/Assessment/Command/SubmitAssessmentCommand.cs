@@ -95,7 +95,6 @@ namespace Application.Features.Assessment.Command
                 {
                     AssessmentTemplateId = command.AssessmentTemplateId,
                     ChildProfileId = command.ChildProfileId,
-                    TherapistId = therapistId,
                     SessionOccurrenceId = command.SessionOccurrenceId,
                     AssessmentDate = command.AssessmentDate,
                     TotalScore = totalScore,

@@ -24,5 +24,8 @@ namespace Domain.Entities
 
         // Navigation
         public AssessmentTemplate AssessmentTemplate { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 }

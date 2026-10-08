@@ -16,7 +16,6 @@ namespace Domain.Entities
         public string? Description { get; set; }
 
         //Ownership
-        public Guid TherapistId { get; set; }
         public Guid ChildProfileId { get; set; }
         public Guid? OrganizationId { get; set; }
 
@@ -33,7 +32,9 @@ namespace Domain.Entities
         public bool IsActive { get; set; } = true;
 
         //Navigation
-        public UserProfile Therapist { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
         public ChildProfile ChildProfile { get; set; }
         public Organizations? Organization { get; set; }
         public SessionRecurrenceRule? RecurrenceRule { get; set; }

@@ -34,8 +34,6 @@ namespace Application.Features.Session.Command
 
                 occurrence.Status = SessionStatus.InProgress;
                 occurrence.ActualStartTime = DateTime.UtcNow;
-                occurrence.LastModified = DateTime.UtcNow;
-                occurrence.LastModifiedBy = _authenticatedUser.UserId;
 
                 await _occurrenceRepository.UpdateAsync(occurrence);
 

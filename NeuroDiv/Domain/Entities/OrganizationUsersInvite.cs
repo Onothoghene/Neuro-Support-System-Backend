@@ -17,5 +17,8 @@ namespace Domain.Entities
         public Guid? AcceptedByUserId { get; set; }
 
         public Organizations Organization { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 }

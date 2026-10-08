@@ -36,8 +36,6 @@ namespace Application.Features.TherapistAssignment.Command
 
                 // Set EndDate — this is the only time EndDate gets filled
                 assignment.EndDate = DateTime.UtcNow;
-                assignment.LastModified = DateTime.UtcNow;
-                assignment.LastModifiedBy = _authenticatedUser.UserId;
 
                 await _assignmentRepository.UpdateAsync(assignment);
 

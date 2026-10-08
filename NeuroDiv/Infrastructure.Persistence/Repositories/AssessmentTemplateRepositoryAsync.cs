@@ -35,7 +35,7 @@ namespace Infrastructure.Persistence.Repositories
                 query = query.Where(t => t.IsSystemTemplate ||
                                    (t.OrganizationId == organizationId.Value
                                    && t.Visibility == TemplateVisibility.OrgWide) ||
-                                   (t.CreatedBy == therapistId.Value.ToString()
+                                   (t.CreatedBy == therapistId.Value
                                    && t.Visibility == TemplateVisibility.Private));
             }
 

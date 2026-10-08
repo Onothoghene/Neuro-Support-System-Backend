@@ -12,5 +12,8 @@ namespace Domain.Entities
         public ChildProfile ChildProfile { get; set; }
         public ParentProfile ParentProfile { get; set; }
 
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 }

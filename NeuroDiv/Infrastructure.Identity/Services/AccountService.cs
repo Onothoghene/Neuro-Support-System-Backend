@@ -397,7 +397,7 @@ namespace Infrastructure.Identity.Services
                         OrganizationId = invite.OrganizationId,
                         IsActive = true,
                         JoinedAt = DateTime.UtcNow,
-                        CreatedBy = profileResult.Id.ToString(),
+                        CreatedBy = profileResult.Id,
                     };
 
                     await _orgUserRepository.AddAsync(orgUser);
@@ -407,7 +407,7 @@ namespace Infrastructure.Identity.Services
                         UserId = profileResult.Id,
                         OrganizationId = invite.OrganizationId,
                         OrganizationRoleId = invite.OrganizationRoleId,
-                        CreatedBy = profileResult.Id.ToString(),
+                        CreatedBy = profileResult.Id,
                     };
 
                     await _organizationUserRolesRepository.AddAsync(orgUserRole);
@@ -429,7 +429,7 @@ namespace Infrastructure.Identity.Services
 
                             currentOwnerUserRole.OrganizationRoleId = clinicAdminRole.Id;
                             currentOwnerUserRole.LastModified = DateTime.UtcNow;
-                            currentOwnerUserRole.LastModifiedBy = profileResult.Id.ToString();
+                            currentOwnerUserRole.LastModifiedBy = profileResult.Id;
 
                             await _organizationUserRolesRepository.UpdateAsync(currentOwnerUserRole);
                         }
@@ -521,7 +521,7 @@ namespace Infrastructure.Identity.Services
                 OrganizationId = invite.OrganizationId,
                 IsActive = true,
                 JoinedAt = DateTime.UtcNow,
-                CreatedBy = authenticatedUserId.ToString(),
+                CreatedBy = authenticatedUserId,
             };
 
             await _orgUserRepository.AddAsync(orgUser);
@@ -532,7 +532,7 @@ namespace Infrastructure.Identity.Services
                 UserId = authenticatedUserId,
                 OrganizationId = invite.OrganizationId,
                 OrganizationRoleId = invite.OrganizationRoleId,
-                CreatedBy = authenticatedUserId.ToString(),
+                CreatedBy = authenticatedUserId,
                 Created = DateTime.UtcNow,
             };
 
@@ -559,7 +559,7 @@ namespace Infrastructure.Identity.Services
 
                     currentOwnerUserRole.OrganizationRoleId = clinicAdminRole.Id;
                     currentOwnerUserRole.LastModified = DateTime.UtcNow;
-                    currentOwnerUserRole.LastModifiedBy = authenticatedUserId.ToString();
+                    currentOwnerUserRole.LastModifiedBy = authenticatedUserId;
 
                     await _organizationUserRolesRepository.UpdateAsync(currentOwnerUserRole);
                 }
@@ -570,7 +570,7 @@ namespace Infrastructure.Identity.Services
             invite.AcceptedAt = DateTime.UtcNow;
             invite.LastModified = DateTime.UtcNow;
             invite.AcceptedByUserId = authenticatedUserId;
-            invite.LastModifiedBy = authenticatedUserId.ToString();
+            invite.LastModifiedBy = authenticatedUserId;
 
             await _inviteRepository.UpdateAsync(invite);
 
@@ -890,8 +890,6 @@ namespace Infrastructure.Identity.Services
                     Name = r.Name,
                     Description = r.Description,
                     IsDefault = true,
-                    CreatedBy = "System",
-                    Created = DateTime.UtcNow
                 }).ToList();
 
                 var seededRoles = await _organizationRolesRepository.AddRangeAsync(roleEntities);
@@ -907,7 +905,7 @@ namespace Infrastructure.Identity.Services
                     //OrganizationRoleId = clinicOwnerRole.Id,
                     IsActive = true,
                     JoinedAt = DateTime.UtcNow,
-                    CreatedBy = profileResult.Id.ToString(),
+                    CreatedBy = profileResult.Id,
                     Created = DateTime.UtcNow,
                 };
 
@@ -919,7 +917,7 @@ namespace Infrastructure.Identity.Services
                     UserId = profileResult.Id,
                     OrganizationId = orgResult.Id,
                     OrganizationRoleId = clinicOwnerRole.Id,
-                    CreatedBy = profileResult.Id.ToString(),
+                    CreatedBy = profileResult.Id,
                 };
 
                 await _organizationUserRolesRepository.AddAsync(orgUserRole);
@@ -979,7 +977,6 @@ namespace Infrastructure.Identity.Services
             var otp = GenerateOTP();
             var emailChangeRequest = new EmailChangeRequest
             {
-                UserId = Guid.Parse(userProfileId),
                 CurrentEmail = userProfile.Email,
                 NewEmail = request.NewEmail,
                 OtpCode = otp,
@@ -1047,15 +1044,11 @@ namespace Infrastructure.Identity.Services
 
             // Update UserProfile email
             userProfile.Email = emailChangeRequest.NewEmail;
-            userProfile.LastModified = DateTime.UtcNow;
-            userProfile.LastModifiedBy = userProfileId;
 
             await _userProfile.UpdateAsync(userProfile);
 
             // Mark the request as used — prevents OTP replay
             emailChangeRequest.IsUsed = true;
-            emailChangeRequest.LastModified = DateTime.UtcNow;
-            emailChangeRequest.LastModifiedBy = userProfileId;
 
             await _emailChangeRequestRepository.UpdateAsync(emailChangeRequest);
 

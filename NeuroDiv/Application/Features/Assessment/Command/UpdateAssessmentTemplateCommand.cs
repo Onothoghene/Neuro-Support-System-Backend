@@ -51,7 +51,7 @@ namespace Application.Features.Assessment.Command
                     template.IsActive = command.IsActive.Value;
 
                 template.LastModified = DateTime.UtcNow;
-                template.LastModifiedBy = _authenticatedUser.UserId;
+                template.LastModifiedBy = Guid.Parse(_authenticatedUser.UserId);
 
                 await _assessmentTemplateRepository.UpdateAsync(template);
 

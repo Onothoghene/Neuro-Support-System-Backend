@@ -13,8 +13,8 @@ namespace Application.Mappings
         {
             // SessionClass -> SessionClassVm
             CreateMap<SessionClass, SessionClassVM>()
-                .ForMember(dest => dest.TherapistFirstName, opt => opt.MapFrom(src => src.Therapist.FirstName))
-                .ForMember(dest => dest.TherapistLastName, opt => opt.MapFrom(src => src.Therapist.LastName))
+                .ForMember(dest => dest.TherapistFirstName, opt => opt.MapFrom(src => src.CreatedByNavigation.FirstName))
+                .ForMember(dest => dest.TherapistLastName, opt => opt.MapFrom(src => src.CreatedByNavigation.LastName))
                 .ForMember(dest => dest.ChildFirstName, opt => opt.MapFrom(src => src.ChildProfile.FirstName))
                 .ForMember(dest => dest.ChildLastName, opt => opt.MapFrom(src => src.ChildProfile.LastName))
                 .ForMember(dest => dest.Mode, opt => opt.MapFrom(src => src.Mode.ToString()))

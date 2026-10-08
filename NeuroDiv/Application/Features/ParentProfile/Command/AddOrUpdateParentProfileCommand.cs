@@ -53,8 +53,6 @@ namespace Application.Features.ParentProfile.Command
                     parent.PhoneNumber = command.PhoneNumber;
                     parent.Relationship = command.Relationship;
                     parent.IsPrimaryContact = command.IsPrimaryContact;
-                    parent.LastModified = DateTime.UtcNow;
-                    parent.LastModifiedBy = _authenticatedUser.UserId;
 
                     await _parentProfileRepository.UpdateAsync(parent);
 
@@ -83,8 +81,6 @@ namespace Application.Features.ParentProfile.Command
                     {
                         ChildProfileId = command.ChildProfileId,
                         ParentProfileId = savedParent.Id,
-                        CreatedBy = _authenticatedUser.UserId,
-                        Created = DateTime.UtcNow,
                     });
 
                     ts.Complete();

@@ -85,8 +85,6 @@ namespace Application.JobServices
                             StartTime = rule.StartTime,
                             EndTime = rule.EndTime,
                             Status = SessionStatus.Scheduled,
-                            CreatedBy = "System",
-                            Created = DateTime.UtcNow,
                         });
                         generated++;
                     }

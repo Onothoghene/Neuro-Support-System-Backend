@@ -34,13 +34,14 @@ namespace Infrastructure.Persistence.Repositories
 
         public IQueryable<Comments> GetUserComments(string userId)
         {
-            return _comments.Where(x => x.CreatedBy  == userId);
+            // return _comments.Where(x => x.CreatedBy  == userId);
+            return _comments.Where(x => x.IsDeleted == false);
         }
 
         public IQueryable<Comments> GetUserFoodComments(string userId, string foodId)
         {
             Guid foodIdGuid = Guid.Parse(foodId);
-            return _comments.Where(x => x.CreatedBy == userId &&  x.Id == foodIdGuid);
+            return _comments.Where(x => x.IsDeleted == false);
         }
     }
 }

@@ -11,8 +11,6 @@ namespace Domain.Entities
             Specializations = new HashSet<TherapistSpecialization>();
         }
 
-        public Guid UserProfileId { get; set; }
-
         // ── Professional info
         public string? Bio { get; set; }
         public int? YearsOfExperience { get; set; }
@@ -31,7 +29,7 @@ namespace Domain.Entities
         /// </summary>
         public bool IsPublicProfile { get; set; } = false;
 
-        public UserProfile UserProfile { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
         public ICollection<TherapistSpecialization> Specializations { get; set; }
 
     }

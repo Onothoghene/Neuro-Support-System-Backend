@@ -14,8 +14,6 @@ namespace Domain.Entities
         {
         }
 
-        public Guid UserId { get; set; }
-
         /// <summary>The email before the change — for reference/audit.</summary>
         public string CurrentEmail { get; set; }
 
@@ -35,6 +33,8 @@ namespace Domain.Entities
         public bool IsUsed { get; set; } = false;
 
         // Navigation
-        public UserProfile UserProfile { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 }

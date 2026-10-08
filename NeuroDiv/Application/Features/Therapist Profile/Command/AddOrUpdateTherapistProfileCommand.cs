@@ -57,17 +57,12 @@ namespace Application.Features.TherapistProfile.Command
                         existingProfile.LicenseType = command.LicenseType;
                         existingProfile.LicenseExpiryDate = command.LicenseExpiryDate;
                         existingProfile.IsPublicProfile = command.IsPublicProfile;
-                        existingProfile.LastModified = DateTime.UtcNow;
-                        existingProfile.LastModifiedBy = _authenticatedUser.UserId;
 
                         // Replace specializations entirely
                         existingProfile.Specializations.Clear();
                         existingProfile.Specializations = _mapper.Map<List<TherapistSpecialization>>(command.Specializations)
-                                                                .Select(s =>
-                                                                {
+                                                                .Select(s =>{
                                                                     s.TherapistProfileId = existingProfile.Id;
-                                                                    s.CreatedBy = _authenticatedUser.UserId;
-                                                                    s.Created = DateTime.UtcNow;
                                                                     return s;
                                                                 }).ToList();
 
@@ -80,7 +75,7 @@ namespace Application.Features.TherapistProfile.Command
                     {
                         // ── Create 
                         var therapistProfile = _mapper.Map<Domain.Entities.TherapistProfile>(command);
-                        therapistProfile.UserProfileId = userProfileId;
+                        therapistProfile.CreatedBy = userProfileId;
 
                         //therapistProfile.Specializations = _mapper.Map<List<TherapistSpecialization>>(command.Specializations)
                         //                                        .Select(s =>

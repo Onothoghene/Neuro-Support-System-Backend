@@ -41,8 +41,6 @@ namespace Application.Features.OrganizationUsersInvite.Command
             {
                 using (var ts = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
                 {
-                    var userId = _user.UserId;
-
                     //Update functionality
                     if (command.Id.HasValue && command.Id is not null)
                     {
@@ -63,8 +61,6 @@ namespace Application.Features.OrganizationUsersInvite.Command
                         orgUserInvite.Email = command.Email;
                         orgUserInvite.OrganizationId = command.OrganizationId;
                         orgUserInvite.OrganizationRoleId = command.OrganizationRoleId;
-                        orgUserInvite.LastModifiedBy = userId;
-                        orgUserInvite.LastModified = DateTime.UtcNow;
 
                         if (emailChanged)
                         {
@@ -89,8 +85,6 @@ namespace Application.Features.OrganizationUsersInvite.Command
                       //  newInvite.Token = GenerateInviteToken();
                         newInvite.ExpiryDate = DateTime.UtcNow.AddDays(7);
                         newInvite.IsAccepted = false;
-                        newInvite.CreatedBy = userId;
-                        newInvite.Created = DateTime.UtcNow;
 
                         await _organizationUsersInviteRepository.AddAsync(newInvite);
 

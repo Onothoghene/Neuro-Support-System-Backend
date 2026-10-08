@@ -2,6 +2,7 @@
 using Domain.Common;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -63,15 +64,15 @@ namespace Infrastructure.Persistence.Contexts
         {
             foreach (var entry in ChangeTracker.Entries<AuditableBaseEntity>())
             {
-                string authUser;
+                Guid authUser = Guid.Empty;
 
                 if (_authenticatedUser.UserId != null)
                 {
-                    authUser = _authenticatedUser.UserId.ToString();
+                    authUser = Guid.Parse(_authenticatedUser.UserId);
                 }
                 else
                 {
-                    authUser = null;
+                    authUser = Guid.Empty;
                 }
 
                 if (entry.Entity.IsDeleted == true)

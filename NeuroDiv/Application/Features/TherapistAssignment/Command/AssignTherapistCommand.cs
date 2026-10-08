@@ -48,8 +48,6 @@ namespace Application.Features.TherapistAssignment.Command
                     TherapistId = command.TherapistId,
                     Role = command.Role,
                     StartDate = DateTime.UtcNow,
-                    CreatedBy = _authenticatedUser.UserId,
-                    Created = DateTime.UtcNow,
                 };
 
                 await _assignmentRepository.AddAsync(assignment);

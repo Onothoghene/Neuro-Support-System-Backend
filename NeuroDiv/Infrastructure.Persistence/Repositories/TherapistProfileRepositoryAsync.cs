@@ -19,14 +19,14 @@ namespace Infrastructure.Persistence.Repositories
 
         public async Task<TherapistProfile?> GetByUserIdAsync(Guid userProfileId)
         {
-            return await _therapistProfiles.Include(t => t.UserProfile)
+            return await _therapistProfiles.Include(t => t.CreatedByNavigation)
                                            .Include(t => t.Specializations)
-                                           .FirstOrDefaultAsync(t => t.UserProfileId == userProfileId && !t.IsDeleted);
+                                           .FirstOrDefaultAsync(t => t.CreatedBy == userProfileId && !t.IsDeleted);
         }
 
         public async Task<TherapistProfile?> GetByIdAsync(Guid id)
         {
-            return await _therapistProfiles.Include(t => t.UserProfile)
+            return await _therapistProfiles.Include(t => t.CreatedByNavigation)
                                            .Include(t => t.Specializations)
                                            .FirstOrDefaultAsync(t => t.Id == id && !t.IsDeleted);
         }

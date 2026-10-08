@@ -31,5 +31,8 @@ namespace Domain.Entities
         public SessionCancellation? Cancellation { get; set; }
         public SessionNoShow? NoShow { get; set; }
         public ICollection<ChildSessionRecord> ChildSessionRecords { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 }

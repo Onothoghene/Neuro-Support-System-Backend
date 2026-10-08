@@ -64,7 +64,7 @@ namespace Application.Features.Session.Command
 
                 var sessionClass = _mapper.Map<SessionClass>(command);
                 sessionClass.IsActive = true;
-                sessionClass.TherapistId = therapistId;
+                sessionClass.CreatedBy = therapistId;
 
                 // Add recurrence rule
                 if (command.IsRecurring && command.Recurrence != null)

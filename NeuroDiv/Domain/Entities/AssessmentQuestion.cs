@@ -22,5 +22,8 @@ namespace Domain.Entities
         // Navigation
         public AssessmentSection AssessmentSection { get; set; }
         public ICollection<AssessmentQuestionOption> Options { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
     }
 }

@@ -25,6 +25,9 @@ namespace Domain.Entities
         // Navigation
         public SessionClass SessionClass { get; set; }
         public SessionDuration? SessionDuration { get; set; }
+        public UserProfile CreatedByNavigation { get; set; }
+        public UserProfile LastModifiedByNavigation { get; set; }
+        public UserProfile DeletedByNavigation { get; set; }
 
         // Helpers
         public List<DayOfWeek> GetDaysOfWeek()
