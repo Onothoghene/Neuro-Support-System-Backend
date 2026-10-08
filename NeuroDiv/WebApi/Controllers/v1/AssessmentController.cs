@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
-    [Authorize]
     [Route("api/v{version:apiVersion}/[controller]")]
+    [Authorize]
     public class AssessmentController : BaseApiController
     {
         /// <summary>
