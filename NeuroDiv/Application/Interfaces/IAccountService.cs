@@ -11,7 +11,7 @@ namespace Application.Interfaces
     {
         Task<Response<string>> RegisterAsync(RegisterRequest request);
         Task<Response<bool>> VerifyUser(int otp);
-        Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, bool isOffline = false);
+        Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, bool isOffline = false, bool isExternal = false);
         Task<Response<string>> ConfirmEmailAsync(Guid userId, string code);
         Task<Response<bool>> ForgotPassword(ForgotPasswordRequest model);
         Task<Response<string>> ResetPassword(ResetPasswordRequest model);

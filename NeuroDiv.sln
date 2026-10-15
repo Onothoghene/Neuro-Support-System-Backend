@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Persistence"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Shared", "NeuroDiv\Infrastructure.Shared\Infrastructure.Shared.csproj", "{23CBD79A-380D-BE5C-7C33-6F7A8DE53971}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Integrations", "NeuroDiv\Infrastructure.Integrations\Infrastructure.Integrations.csproj", "{7AAA127A-C945-691E-DBC7-FA2E982EACF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{23CBD79A-380D-BE5C-7C33-6F7A8DE53971}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23CBD79A-380D-BE5C-7C33-6F7A8DE53971}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23CBD79A-380D-BE5C-7C33-6F7A8DE53971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AAA127A-C945-691E-DBC7-FA2E982EACF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAA127A-C945-691E-DBC7-FA2E982EACF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAA127A-C945-691E-DBC7-FA2E982EACF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAA127A-C945-691E-DBC7-FA2E982EACF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{1717402B-0AA9-21E2-75F7-C94A57CDAA28} = {5B5BFA23-BE7A-4970-967C-E0AB1B758F04}
 		{84098345-B445-AFC7-8146-914237BA49D3} = {5B5BFA23-BE7A-4970-967C-E0AB1B758F04}
 		{23CBD79A-380D-BE5C-7C33-6F7A8DE53971} = {5B5BFA23-BE7A-4970-967C-E0AB1B758F04}
+		{7AAA127A-C945-691E-DBC7-FA2E982EACF1} = {5B5BFA23-BE7A-4970-967C-E0AB1B758F04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6236192B-A9EB-4AF7-AA13-8F6C9CA54B74}

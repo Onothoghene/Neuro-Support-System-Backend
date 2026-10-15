@@ -160,15 +160,16 @@ namespace Infrastructure.Identity.Services
             }
         }
 
-        public async Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, bool isOffline = false)
+        public async Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, bool isOffline = false, bool isExternal = false)
         {
             var user = await _userManager.FindByEmailAsync(request.Email) ??
                              throw new ApiException($"No Registered Account with {request.Email}.");
 
-            if (!user.EmailConfirmed)
+            if (!isExternal && !user.EmailConfirmed)
                 throw new ApiException($"Account Not Confirmed for '{request.Email}'.");
 
-            var result = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
+            var result = isExternal ? SignInResult.Success :
+                await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
 
             if (!result.Succeeded)
                 throw new ApiException($"Invalid Credentials for '{request.Email}'.");
@@ -184,7 +185,7 @@ namespace Infrastructure.Identity.Services
                 UserId = userProfile.Id.ToString(),
                 JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 Email = user.Email,
-                UserName = user.UserName,
+                UserName = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
             };
