@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using System.Configuration;
 using System.Threading.Tasks;
 using WebApi.Extensions;
 using WebApi.Services;
@@ -37,6 +38,7 @@ namespace WebApi
             services.AddIdentityInfrastructure(_config);
             services.AddPersistenceInfrastructure(_config);
             services.AddSharedInfrastructure(_config);
+            services.AddIntegrations(_config);
             services.AddSwaggerExtension();
             services.AddControllers();
             services.AddApiVersioningExtension();
